@@ -1,11 +1,11 @@
 interface Props {
-    children : React.ReactNode
+    children : React.ReactNode  
 }
 
 const MainLayout = (props : Props) => {
     return(
         <>
-            <div className="flex flex-row gap-20 items-center justify-center ">
+            <div className="flex flex-col justify-center items-center h-screen gap-12">
                 {props.children}
             </div>
         </>
