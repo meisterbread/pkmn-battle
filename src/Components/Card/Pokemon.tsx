@@ -1,7 +1,7 @@
 import Base from '../../assets/pkmn_base.png'
 
 interface PokemonSprite {
-    sprite : string,
+    sprite? : string,
 }
 
 const Pokemon = (props : PokemonSprite) => {
