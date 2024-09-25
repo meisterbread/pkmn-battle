@@ -62,7 +62,7 @@ const pokemonBattle = async (req : Request, res : Response) => {
 
 
     }catch(error){
-
+      console.log(error)
     }
 }
 
