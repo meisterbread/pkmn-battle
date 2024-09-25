@@ -34,21 +34,36 @@ const randomPokemon = async(req: Request, res: Response) => {
     }
 }
 
-// const randomPokemon = async(req : Request, res : Response) => {
-//     try{
-//         const id : number = Math.floor(Math.random() * 1025) + 1
-//         const idString = id.toString()
-//         console.log(id)
+const pokemonBattle = async (req : Request, res : Response) => {
+    const pokeOneAttack = Number(req.params.pokeOneAttack)
+    let pokeOneHealth = Number(req.params.pokeOneHealth)
 
-//         const test: number = 1
+    const pokeTwoAttack = Number(req.params.pokeTwoAttack)
+    let pokeTwoHealth = Number(req.params.pokeTwoHealth)
 
-//         const response = await fetch(`${url}${test}`)
-//         const data = (await response.json()) as PokemonModel
+    try{
 
-//         res.json(data)
-//     }catch(e){
-//         console.log(e)
-//     }
-// }
+        console.log(`pokemone one hp: ${pokeOneHealth} atk ${pokeOneAttack}`)
+        console.log(`pokemone two hp: ${pokeTwoHealth} atk ${pokeTwoAttack}`)
 
-export {fetchPokemon, randomPokemon}
+        pokeOneHealth -= pokeTwoAttack
+        pokeTwoHealth -= pokeOneAttack
+
+        console.log(`pokemone one hp: ${pokeOneHealth}`)
+        console.log(`pokemone two hp: ${pokeTwoHealth}`)
+
+        if(pokeOneHealth <= 0) {
+            res.send({message: "You lost the battle!"})
+            console.log("lose")
+        } else if (pokeTwoHealth <= 0){
+            res.send({message: "You won the battle!"})
+            console.log("win")
+        }
+
+
+    }catch(error){
+
+    }
+}
+
+export {fetchPokemon, randomPokemon, pokemonBattle}

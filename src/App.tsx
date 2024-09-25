@@ -11,8 +11,9 @@ function App() {
   const [pokemonOne, setPokemonOne] = useState<PokemonModel | null>(null);
   const [pokemonTwo, setPokemonTwo] = useState<PokemonModel | null>(null);
 
-  const [pokemonName, setPokemonName] = useState("dragonair")
+  const [message, setMessage] = useState<string>("")
 
+  const [pokemonName, setPokemonName] = useState("charmander")
 
   const fetchData = async (name : string) => {
     try {
@@ -38,6 +39,22 @@ function App() {
     }
   }
 
+  const battle = async() => {
+    try{
+      const response = await fetch(`http://localhost:3000/pokemon/battle/
+        ${pokemonOne?.stats.find(stat => stat.stat.name === 'hp')?.base_stat}/
+        ${pokemonOne?.stats.find(stat => stat.stat.name === 'attack')?.base_stat}/
+        ${pokemonTwo?.stats.find(stat => stat.stat.name === 'hp')?.base_stat}/
+        ${pokemonTwo?.stats.find(stat => stat.stat.name === 'attack')?.base_stat}
+        `)
+
+      const data = (await response.json())
+      setMessage(data.message)
+    } catch(error){
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <MainLayout>
@@ -47,11 +64,11 @@ function App() {
           <h1 className='text-3xl font-bold text-red-500'>Versus</h1>
           <Card name={pokemonTwo?.name.toUpperCase()} health={pokemonTwo?.stats.find(stat => stat.stat.name === 'hp')?.base_stat} attack={pokemonTwo?.stats.find(stat => stat.stat.name === 'attack')?.base_stat} url={pokemonTwo?.sprites.front_default}></Card>
         </PokemonLayout>
-        <Menu/>
+        <Menu result={message}/>
         <input placeholder='Enter Pokemon'></input>
         <button onClick={ () => { fetchData(pokemonName);}}>test</button>
         <button onClick={() => {fetchRandom()}}>test 2</button>
-
+        <button onClick={() => {battle()}}>test 3</button>
       </MainLayout>
     </>
   )
