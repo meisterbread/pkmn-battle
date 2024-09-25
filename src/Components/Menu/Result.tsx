@@ -1,8 +1,11 @@
+interface Props {
+    result : string
+}
 
-const Result = () => {
+const Result = ({result} : Props) => {
     return(
         <div className="text-center">
-            <p>Your pokemon won the battle!</p>
+            {result}
         </div>
     )
 }

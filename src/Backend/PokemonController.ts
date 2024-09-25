@@ -34,4 +34,36 @@ const randomPokemon = async(req: Request, res: Response) => {
     }
 }
 
-export {fetchPokemon, randomPokemon}
+const pokemonBattle = async (req : Request, res : Response) => {
+    const pokeOneAttack = Number(req.params.pokeOneAttack)
+    let pokeOneHealth = Number(req.params.pokeOneHealth)
+
+    const pokeTwoAttack = Number(req.params.pokeTwoAttack)
+    let pokeTwoHealth = Number(req.params.pokeTwoHealth)
+
+    try{
+
+        console.log(`pokemone one hp: ${pokeOneHealth} atk ${pokeOneAttack}`)
+        console.log(`pokemone two hp: ${pokeTwoHealth} atk ${pokeTwoAttack}`)
+
+        pokeOneHealth -= pokeTwoAttack
+        pokeTwoHealth -= pokeOneAttack
+
+        console.log(`pokemone one hp: ${pokeOneHealth}`)
+        console.log(`pokemone two hp: ${pokeTwoHealth}`)
+
+        if(pokeOneHealth <= 0) {
+            res.send({message: "You lost the battle!"})
+            console.log("lose")
+        } else if (pokeTwoHealth <= 0){
+            res.send({message: "You won the battle!"})
+            console.log("win")
+        }
+
+
+    }catch(error){
+      console.log(error)
+    }
+}
+
+export {fetchPokemon, randomPokemon, pokemonBattle}
