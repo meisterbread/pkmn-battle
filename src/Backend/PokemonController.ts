@@ -34,21 +34,4 @@ const randomPokemon = async(req: Request, res: Response) => {
     }
 }
 
-// const randomPokemon = async(req : Request, res : Response) => {
-//     try{
-//         const id : number = Math.floor(Math.random() * 1025) + 1
-//         const idString = id.toString()
-//         console.log(id)
-
-//         const test: number = 1
-
-//         const response = await fetch(`${url}${test}`)
-//         const data = (await response.json()) as PokemonModel
-
-//         res.json(data)
-//     }catch(e){
-//         console.log(e)
-//     }
-// }
-
 export {fetchPokemon, randomPokemon}

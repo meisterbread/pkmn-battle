@@ -48,7 +48,7 @@ function App() {
           <Card name={pokemonTwo?.name.toUpperCase()} health={pokemonTwo?.stats.find(stat => stat.stat.name === 'hp')?.base_stat} attack={pokemonTwo?.stats.find(stat => stat.stat.name === 'attack')?.base_stat} url={pokemonTwo?.sprites.front_default}></Card>
         </PokemonLayout>
         <Menu/>
-        <input placeholder='Enter Pokemon'></input>
+        
         <button onClick={ () => { fetchData(pokemonName);}}>test</button>
         <button onClick={() => {fetchRandom()}}>test 2</button>
 
