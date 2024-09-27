@@ -28,9 +28,9 @@ function App() {
   }
 
   const handlePokemonName = async (name : string) => {
-    await setPokemonName(name.toLowerCase())
+    await setPokemonName(name)
     console.log(pokemonName)
-    await fetchData(name)
+    await fetchData(name.toLowerCase())
   }
 
 

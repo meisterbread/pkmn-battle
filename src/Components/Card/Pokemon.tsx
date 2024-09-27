@@ -8,7 +8,7 @@ const Pokemon = (props : PokemonSprite) => {
     return(
         <>
             <div className='relative flex justify-center'>
-                <img className="h-32 w-32 absolute" src={props.sprite}></img>
+                {props.sprite && <img className="h-32 w-32 absolute" src={props.sprite} />}
                 <img className="h-48 w-auto "src={Base}/>
             </div>
         </>
