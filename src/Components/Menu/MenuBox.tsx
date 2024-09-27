@@ -7,7 +7,7 @@ interface Props {
 const MenuBox = (props : Props) => {
     return(
         <>
-            <div className="w-8/12 h-32 border-2 bg-gray-200 border-gray-700 rounded-lg flex gap-5 justify-center items-center">
+            <div className="w-[720px] h-36 border-2 bg-gray-200 border-gray-700 rounded-lg flex flex-col gap-5 justify-center items-center">
                 {props.children}
             </div>
         </>

@@ -11,9 +11,9 @@ function App() {
   const [pokemonOne, setPokemonOne] = useState<PokemonModel | null>(null);
   const [pokemonTwo, setPokemonTwo] = useState<PokemonModel | null>(null);
 
-  const [message, setMessage] = useState<string>("")
+  const [pokemonName, setPokemonName] = useState<string>("")
 
-  const [pokemonName, setPokemonName] = useState("charmander")
+  const [message, setMessage] = useState<string>("")
 
   const fetchData = async (name : string) => {
     try {
@@ -26,6 +26,13 @@ function App() {
       console.log(error)
     }
   }
+
+  const handlePokemonName = async (name : string) => {
+    await setPokemonName(name.toLowerCase())
+    console.log(pokemonName)
+    await fetchData(name)
+  }
+
 
   const fetchRandom = async() => {
     try{
@@ -60,15 +67,26 @@ function App() {
       <MainLayout>
       <Header title='Pokemon Battle Simulator'/>
         <PokemonLayout>
-          <Card name={pokemonOne?.name.toUpperCase()} health={pokemonOne?.stats.find(stat => stat.stat.name === 'hp')?.base_stat} attack={pokemonOne?.stats.find(stat => stat.stat.name === 'attack')?.base_stat} url={pokemonOne?.sprites.front_default}></Card>
+          <Card 
+            name={pokemonOne?.name.toUpperCase()} 
+            health={pokemonOne?.stats.find(stat => stat.stat.name === 'hp')?.base_stat} 
+            attack={pokemonOne?.stats.find(stat => stat.stat.name === 'attack')?.base_stat} 
+            url={pokemonOne?.sprites.front_default}
+           />
           <h1 className='text-3xl font-bold text-red-500'>Versus</h1>
-          <Card name={pokemonTwo?.name.toUpperCase()} health={pokemonTwo?.stats.find(stat => stat.stat.name === 'hp')?.base_stat} attack={pokemonTwo?.stats.find(stat => stat.stat.name === 'attack')?.base_stat} url={pokemonTwo?.sprites.front_default}></Card>
+          <Card 
+            name={pokemonTwo?.name.toUpperCase()} 
+            health={pokemonTwo?.stats.find(stat => stat.stat.name === 'hp')?.base_stat} 
+            attack={pokemonTwo?.stats.find(stat => stat.stat.name === 'attack')?.base_stat} 
+            url={pokemonTwo?.sprites.front_default}
+            />
         </PokemonLayout>
-        <Menu result={message}/>
-        <input placeholder='Enter Pokemon'></input>
-        <button onClick={ () => { fetchData(pokemonName);}}>test</button>
-        <button onClick={() => {fetchRandom()}}>test 2</button>
-        <button onClick={() => {battle()}}>test 3</button>
+        <Menu 
+          result={message} 
+          onSwap={handlePokemonName}
+          onBattleClick={battle} 
+          onRandom={fetchRandom}       
+        />
       </MainLayout>
     </>
   )

@@ -52,12 +52,15 @@ const pokemonBattle = async (req : Request, res : Response) => {
         console.log(`pokemone one hp: ${pokeOneHealth}`)
         console.log(`pokemone two hp: ${pokeTwoHealth}`)
 
-        if(pokeOneHealth <= 0) {
-            res.send({message: "You lost the battle!"})
-            console.log("lose")
-        } else if (pokeTwoHealth <= 0){
+        if(pokeOneHealth === pokeTwoHealth) {
+            res.send({message: "The battle is a draw!"})
+            console.log("draw")
+        } else if (pokeTwoHealth <= pokeOneHealth){
             res.send({message: "You won the battle!"})
             console.log("win")
+        } else if (pokeOneHealth <= pokeTwoHealth){
+            res.send({message : "You lost the battle!"})
+            console.log("lose")
         }
 
 
